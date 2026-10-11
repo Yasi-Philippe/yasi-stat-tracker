@@ -1,0 +1,35 @@
+# Private material — never committed
+private/
+*.xlsx
+*.xls
+*.ods
+*.csv
+*.tsv
+*.backup
+*.enc
+
+# Secrets
+.env
+.env.*
+*.jks
+*.keystore
+keystore*.txt
+google-services.json
+GoogleService-Info.plist
+
+# Dependencies and builds
+node_modules/
+dist/
+build/
+coverage/
+android/app/build/
+android/.gradle/
+ios/App/Pods/
+*.apk
+*.aab
+
+# Tooling
+.DS_Store
+*.log
+.vscode/
+.idea/
