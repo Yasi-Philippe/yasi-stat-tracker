@@ -1,0 +1,173 @@
+/** Built-in themes. Users duplicate one in the Theme studio to make their own. */
+
+import type { ThemeDef, ThemeTokens } from '@/core/model/types';
+
+export const FONT_CHOICES: Array<{ id: string; label: string; stack: string; kind: 'sans' | 'serif' | 'mono' }> = [
+  { id: 'manrope', label: 'Manrope', stack: "'Manrope Variable', system-ui, sans-serif", kind: 'sans' },
+  { id: 'inter', label: 'Inter', stack: "'Inter Variable', system-ui, sans-serif", kind: 'sans' },
+  { id: 'sora', label: 'Sora', stack: "'Sora Variable', system-ui, sans-serif", kind: 'sans' },
+  { id: 'space-grotesk', label: 'Space Grotesk', stack: "'Space Grotesk Variable', system-ui, sans-serif", kind: 'sans' },
+  { id: 'instrument-serif', label: 'Instrument Serif', stack: "'Instrument Serif', Georgia, serif", kind: 'serif' },
+  { id: 'fraunces', label: 'Fraunces', stack: "'Fraunces Variable', Georgia, serif", kind: 'serif' },
+  { id: 'jetbrains-mono', label: 'JetBrains Mono', stack: "'JetBrains Mono Variable', ui-monospace, monospace", kind: 'mono' },
+  { id: 'system', label: 'System', stack: 'system-ui, -apple-system, Roboto, sans-serif', kind: 'sans' },
+];
+
+export function fontStack(id: string): string {
+  return FONT_CHOICES.find((f) => f.id === id)?.stack ?? FONT_CHOICES[0]!.stack;
+}
+
+const nocturne: ThemeTokens = {
+  scheme: 'dark',
+  bg: '#0A0B0F',
+  surface: '#12141B',
+  surface2: '#1A1D26',
+  line: 'rgba(236, 240, 255, 0.08)',
+  text: '#F2F1EC',
+  muted: '#8B8F9C',
+  accent: '#C6F432',
+  accent2: '#7C5CFF',
+  positive: '#3DDC97',
+  negative: '#FF5D73',
+  palette: ['#C6F432', '#7C5CFF', '#38BDF8', '#FF8A4C', '#F472B6', '#2DD4BF', '#FACC15', '#A78BFA'],
+  fontUI: 'manrope',
+  fontDisplay: 'instrument-serif',
+  fontNumber: 'jetbrains-mono',
+  radius: 18,
+  glow: 0.65,
+  grid: 'faint',
+  curve: 'smooth',
+  lineWidth: 2.2,
+  areaOpacity: 0.32,
+};
+
+const paper: ThemeTokens = {
+  scheme: 'light',
+  bg: '#F3F0E8',
+  surface: '#FFFDF8',
+  surface2: '#F8F5EE',
+  line: 'rgba(28, 24, 16, 0.10)',
+  text: '#1B1914',
+  muted: '#6F6A5E',
+  accent: '#E4572E',
+  accent2: '#2E5BFF',
+  positive: '#1F9D6B',
+  negative: '#D7263D',
+  palette: ['#E4572E', '#2E5BFF', '#1F9D6B', '#E9A23B', '#8E5BD9', '#0E9AA7', '#C2185B', '#5B6270'],
+  fontUI: 'inter',
+  fontDisplay: 'fraunces',
+  fontNumber: 'inter',
+  radius: 10,
+  glow: 0,
+  grid: 'dashed',
+  curve: 'straight',
+  lineWidth: 1.8,
+  areaOpacity: 0.1,
+};
+
+const tide: ThemeTokens = {
+  scheme: 'dark',
+  bg: '#06111D',
+  surface: '#0C1A2B',
+  surface2: '#122338',
+  line: 'rgba(150, 200, 255, 0.10)',
+  text: '#E8F1FF',
+  muted: '#7E93AE',
+  accent: '#2EE6D6',
+  accent2: '#FF7AB6',
+  positive: '#34D399',
+  negative: '#FB7185',
+  palette: ['#2EE6D6', '#FF7AB6', '#7AA2FF', '#FFC857', '#9B8CFF', '#5EEAD4', '#F59E0B', '#C084FC'],
+  fontUI: 'sora',
+  fontDisplay: 'sora',
+  fontNumber: 'space-grotesk',
+  radius: 16,
+  glow: 0.8,
+  grid: 'faint',
+  curve: 'smooth',
+  lineWidth: 2.4,
+  areaOpacity: 0.28,
+};
+
+const phosphor: ThemeTokens = {
+  scheme: 'dark',
+  bg: '#040604',
+  surface: '#0A0F0A',
+  surface2: '#101810',
+  line: 'rgba(80, 255, 140, 0.14)',
+  text: '#C9FFD9',
+  muted: '#5E9C70',
+  accent: '#39FF88',
+  accent2: '#FFB000',
+  positive: '#39FF88',
+  negative: '#FF4F4F',
+  palette: ['#39FF88', '#FFB000', '#4FC3FF', '#FF6AD5', '#E8FF5A', '#7DFFCF', '#FF7A45', '#B48CFF'],
+  fontUI: 'jetbrains-mono',
+  fontDisplay: 'jetbrains-mono',
+  fontNumber: 'jetbrains-mono',
+  radius: 4,
+  glow: 1,
+  grid: 'dashed',
+  curve: 'step',
+  lineWidth: 1.6,
+  areaOpacity: 0.12,
+};
+
+const ember: ThemeTokens = {
+  scheme: 'dark',
+  bg: '#110C0A',
+  surface: '#1A1310',
+  surface2: '#241A15',
+  line: 'rgba(255, 210, 180, 0.09)',
+  text: '#FBEFE6',
+  muted: '#A38F80',
+  accent: '#FF9F43',
+  accent2: '#FF5E7E',
+  positive: '#8BD17C',
+  negative: '#FF5E5E',
+  palette: ['#FF9F43', '#FF5E7E', '#FFD166', '#C77DFF', '#4CC9F0', '#8BD17C', '#F4A261', '#E76F51'],
+  fontUI: 'manrope',
+  fontDisplay: 'fraunces',
+  fontNumber: 'manrope',
+  radius: 22,
+  glow: 0.55,
+  grid: 'none',
+  curve: 'smooth',
+  lineWidth: 2.6,
+  areaOpacity: 0.38,
+};
+
+const glacier: ThemeTokens = {
+  scheme: 'light',
+  bg: '#EDF2F8',
+  surface: '#FFFFFF',
+  surface2: '#F5F8FC',
+  line: 'rgba(20, 40, 80, 0.10)',
+  text: '#0F1B2D',
+  muted: '#5B6B82',
+  accent: '#3563E9',
+  accent2: '#00B8A9',
+  positive: '#16A34A',
+  negative: '#E11D48',
+  palette: ['#3563E9', '#00B8A9', '#F97316', '#A855F7', '#EAB308', '#EC4899', '#14B8A6', '#64748B'],
+  fontUI: 'sora',
+  fontDisplay: 'sora',
+  fontNumber: 'sora',
+  radius: 14,
+  glow: 0.15,
+  grid: 'faint',
+  curve: 'smooth',
+  lineWidth: 2,
+  areaOpacity: 0.16,
+};
+
+export const BUILT_IN_THEMES: ThemeDef[] = [
+  { id: 'nocturne', name: 'Nocturne', tokens: nocturne, builtIn: true },
+  { id: 'paper', name: 'Paper', tokens: paper, builtIn: true },
+  { id: 'tide', name: 'Tide', tokens: tide, builtIn: true },
+  { id: 'ember', name: 'Ember', tokens: ember, builtIn: true },
+  { id: 'glacier', name: 'Glacier', tokens: glacier, builtIn: true },
+  { id: 'phosphor', name: 'Phosphor', tokens: phosphor, builtIn: true },
+];
+
+export const DEFAULT_THEME = BUILT_IN_THEMES[0]!;

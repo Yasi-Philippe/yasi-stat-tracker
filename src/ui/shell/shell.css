@@ -1,0 +1,219 @@
+.shell {
+  min-height: 100dvh;
+}
+.main {
+  padding: calc(14px + var(--safe-top)) 16px calc(var(--nav-h) + var(--safe-bottom) + 34px);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* Bottom tab bar (phones) */
+.tabbar {
+  position: fixed;
+  left: 50%;
+  bottom: calc(10px + var(--safe-bottom));
+  transform: translateX(-50%);
+  z-index: 40;
+  display: flex;
+  gap: 2px;
+  width: min(calc(100vw - 24px), 420px);
+  height: var(--nav-h);
+  padding: 6px;
+  border-radius: 26px;
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.55);
+}
+.tab {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 20px;
+  color: var(--muted);
+  transition: color 0.2s, background-color 0.25s var(--ease);
+}
+.tab-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 28px;
+  border-radius: 14px;
+  transition: background-color 0.25s var(--ease), transform 0.25s var(--ease-spring);
+}
+.tab-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.tab[aria-current='page'] {
+  color: var(--text);
+}
+.tab[aria-current='page'] .tab-icon {
+  background: var(--accent);
+  color: var(--on-accent);
+  box-shadow: var(--glow-accent);
+  transform: translateY(-1px);
+}
+
+/* Side rail (desktop) */
+.rail {
+  display: none;
+}
+@media (min-width: 980px) {
+  .rail {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 232px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    padding: calc(26px + var(--safe-top)) 16px 20px;
+    border-right: 1px solid var(--line);
+    background: color-mix(in srgb, var(--surface) 55%, transparent);
+    backdrop-filter: blur(12px);
+    z-index: 30;
+  }
+  .tabbar {
+    display: none;
+  }
+  .main {
+    margin-left: 232px;
+    max-width: none;
+    padding: 30px clamp(24px, 4vw, 56px) 60px;
+  }
+  .main > * {
+    max-width: 1180px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.rail-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 8px;
+  font-size: 30px;
+}
+.rail-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rail-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 12px;
+  border-radius: 14px;
+  color: var(--muted);
+  font-weight: 650;
+  transition: background-color 0.2s, color 0.2s;
+}
+.rail-item:hover {
+  color: var(--text);
+  background: color-mix(in srgb, var(--text) 5%, transparent);
+}
+.rail-item[aria-current='page'] {
+  color: var(--text);
+  background: var(--surface-2);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+.rail-item[aria-current='page'] svg {
+  color: var(--accent);
+}
+.rail-foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 8px;
+}
+.rail-email {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Sync badge */
+.sync-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--muted);
+  border-radius: 999px;
+}
+.sync-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--positive);
+  flex: none;
+}
+.sync-dot.idle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--positive);
+  animation: pulse-ring 2.6s ease-out infinite;
+}
+.sync-dot.busy {
+  background: var(--accent);
+  animation: spin 1s linear infinite;
+  border-radius: 2px;
+}
+.sync-dot.off {
+  background: var(--faint);
+}
+.sync-dot.err {
+  background: var(--negative);
+}
+.sync-dot.demo {
+  background: var(--accent-2);
+}
+
+/* Banners */
+.banners {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.banners:not(:empty) {
+  margin-bottom: 14px;
+}
+.banner.demo {
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+.banner.warn {
+  background: var(--negative-soft);
+}
+
+/* Page header */
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  margin: 6px 0 20px;
+}
+.page-title {
+  font-size: clamp(34px, 8.5vw, 50px);
+}
+.page-title em {
+  color: var(--accent);
+}
+.page-sub {
+  margin-top: 4px;
+}
+.page-actions {
+  flex: none;
+}

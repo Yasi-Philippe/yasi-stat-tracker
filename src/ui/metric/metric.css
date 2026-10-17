@@ -1,0 +1,65 @@
+.metric-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 4px 0 12px;
+}
+.metric-badge {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 17px;
+  background: var(--surface-2);
+  flex: none;
+}
+.metric-latest {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin: 0 0 14px;
+}
+.metric-latest .display {
+  font-size: 48px;
+  font-style: italic;
+}
+.heat-card {
+  overflow-x: auto;
+}
+.heatmap {
+  display: flex;
+  gap: 4px;
+  min-width: max-content;
+}
+.heat-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.heat-cell {
+  width: 13px;
+  height: 13px;
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  transition: transform 0.15s var(--ease);
+}
+.heat-cell.on {
+  background: var(--hc);
+  box-shadow: 0 0 calc(8px * var(--glow)) color-mix(in srgb, var(--hc) 50%, transparent);
+}
+.heat-cell.future {
+  background: transparent;
+}
+.heat-cell.today {
+  outline: 1.5px solid var(--text);
+  outline-offset: 1px;
+}
+.heat-cell:not(:disabled):hover {
+  transform: scale(1.25);
+}
+@media (min-width: 760px) {
+  .heat-cell {
+    width: 16px;
+    height: 16px;
+  }
+}

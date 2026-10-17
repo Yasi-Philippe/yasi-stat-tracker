@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Trazo</string>
+    <string name="title_activity_main">Trazo</string>
+    <string name="package_name">io.github.yasiphilippe.stattracker</string>
+    <string name="custom_url_scheme">io.github.yasiphilippe.stattracker</string>
+</resources>

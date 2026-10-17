@@ -1,0 +1,104 @@
+{
+  "name": "yasi-stat-tracker",
+  "productName": "Trazo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Track any personal metric over time, with end-to-end encrypted sync.",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "build:action": "vite build --config vite.action.config.ts",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:emulator": "firebase emulators:exec --only auth,firestore --project demo-trazo \"vitest run --config vitest.emulator.config.ts\"",
+    "emulators": "firebase emulators:start --only auth,firestore --project demo-trazo",
+    "electron:dev": "node scripts/electron-dev.mjs",
+    "electron:build": "npm run build && electron-builder --linux AppImage deb",
+    "android:sync": "npm run build && cap sync android",
+    "android:apk": "bash scripts/build_apk.sh",
+    "electron:smoke": "vite build && TRAZO_SMOKE=1 electron ."
+  },
+  "dependencies": {
+    "@capacitor/android": "8.5.3",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/core": "8.5.3",
+    "@capacitor/filesystem": "8.1.4",
+    "@capacitor/haptics": "8.0.2",
+    "@capacitor/keyboard": "8.0.6",
+    "@capacitor/local-notifications": "8.3.1",
+    "@capacitor/share": "8.0.3",
+    "@fontsource-variable/fraunces": "5.3.0",
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/jetbrains-mono": "5.3.0",
+    "@fontsource-variable/manrope": "5.3.0",
+    "@fontsource-variable/sora": "5.3.0",
+    "@fontsource-variable/space-grotesk": "5.3.0",
+    "@fontsource/instrument-serif": "5.3.0",
+    "dexie": "4.4.6",
+    "echarts": "6.1.0",
+    "firebase": "13.0.0",
+    "hash-wasm": "4.12.0",
+    "lucide-react": "1.55.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "read-excel-file": "9.3.12"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.2",
+    "electron": "44.7.0",
+    "electron-builder": "26.15.3",
+    "fake-indexeddb": "6.2.5",
+    "firebase-tools": "15.33.0",
+    "puppeteer-core": "25.13.0",
+    "typescript": "6.0.3",
+    "vite": "8.3.4",
+    "vitest": "5.0.3"
+  },
+  "build": {
+    "appId": "io.github.yasiphilippe.stattracker",
+    "productName": "Trazo",
+    "artifactName": "Trazo-${version}-${arch}.${ext}",
+    "publish": null,
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "!dist/**/*.map",
+      "electron/**/*",
+      "build/icons/512x512.png",
+      "package.json",
+      "!node_modules/**/*"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility",
+      "icon": "build/icons",
+      "executableName": "trazo",
+      "executableArgs": [
+        "--ozone-platform=x11"
+      ],
+      "maintainer": "Trazo",
+      "desktop": {
+        "entry": {
+          "Name": "Trazo"
+        }
+      }
+    },
+    "deb": {
+      "packageName": "trazo",
+      "packageCategory": "utils"
+    }
+  }
+}

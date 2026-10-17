@@ -1,0 +1,286 @@
+.day-picker {
+  margin: -6px 0 18px;
+}
+.cards {
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 980px) {
+  .cards {
+    grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+  }
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Progress ring in the header */
+.progress {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+.progress-label {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* Metric card */
+.mcard {
+  --mc: var(--accent);
+  position: relative;
+  overflow: hidden;
+  padding: 14px 14px 14px;
+  border-radius: calc(var(--radius) + 4px);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(120% 90% at 100% 0%, color-mix(in srgb, var(--mc) 9%, transparent), transparent 60%),
+    var(--surface);
+  box-shadow: var(--shadow);
+  animation: rise 0.5s var(--ease) both;
+  transition: border-color 0.3s var(--ease);
+}
+.mcard.logged {
+  border-color: color-mix(in srgb, var(--mc) 30%, var(--line));
+}
+.mcard-trend {
+  position: relative;
+  height: 28px;
+  margin: 0 2px 10px;
+  opacity: 0.7;
+  mask-image: linear-gradient(90deg, transparent, #000 25%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 25%);
+}
+.mcard-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mcard-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  padding: 2px;
+  border-radius: 12px;
+}
+.mcard-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--mc) 16%, transparent);
+  color: var(--mc);
+  flex: none;
+}
+.mcard-name {
+  display: block;
+  font-weight: 700;
+  font-size: 15px;
+}
+.mcard-when {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.mcard-body {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 10px 0 8px;
+}
+.mcard-value {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 6px;
+  cursor: text;
+  transition: filter 0.3s;
+}
+.mcard-value.blurred {
+  filter: blur(9px);
+  cursor: pointer;
+}
+.mcard-value input {
+  min-width: 2ch;
+  max-width: 100%;
+  border: 0;
+  outline: none;
+  background: transparent;
+  text-align: right;
+  font-size: 64px;
+  transition: font-size 0.2s var(--ease);
+  font-style: italic;
+  line-height: 1;
+  padding: 0;
+  color: var(--text);
+  caret-color: var(--mc);
+  font-variant-numeric: tabular-nums;
+}
+.mcard-value input::placeholder {
+  color: var(--faint);
+}
+.mcard:not(.logged) .mcard-value input {
+  color: color-mix(in srgb, var(--text) 82%, var(--mc));
+}
+.mcard-unit {
+  font-size: 15px;
+  font-weight: 650;
+  color: var(--muted);
+}
+.step-btn {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  flex: none;
+  color: var(--text);
+  background: color-mix(in srgb, var(--surface-2) 80%, transparent);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+  transition: transform 0.12s var(--ease), background-color 0.2s;
+}
+.step-btn:active {
+  transform: scale(0.9);
+  background: var(--accent-soft);
+}
+.mcard-foot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.mcard-delta {
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--muted);
+}
+.mcard-delta.pos {
+  color: var(--positive);
+}
+.mcard-delta.neg {
+  color: var(--negative);
+}
+.mcard-foot .btn {
+  min-width: 108px;
+}
+.mcard-foot .btn.primary {
+  --btn-bg: var(--mc);
+  --btn-fg: var(--on-accent);
+}
+.logged-btn {
+  --btn-bg: color-mix(in srgb, var(--mc) 14%, transparent);
+  --btn-fg: var(--mc);
+  border-color: transparent;
+}
+.logged-btn:disabled {
+  opacity: 1;
+}
+
+/* Campaign */
+.campaign {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  margin-top: 14px;
+}
+.campaign-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  color: var(--muted);
+  flex: none;
+}
+.campaign.running .campaign-icon {
+  background: var(--accent-2-soft);
+  color: var(--accent-2);
+  box-shadow: 0 0 0 0 var(--accent-2);
+  animation: campaign-pulse 2.4s ease-out infinite;
+}
+@keyframes campaign-pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 40%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 12px transparent;
+  }
+}
+.campaign-title {
+  font-size: 15px;
+}
+
+/* Onboarding */
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
+  gap: 12px;
+}
+.template {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 16px;
+  text-align: left;
+  transition: border-color 0.2s, transform 0.2s var(--ease);
+}
+.template:active {
+  transform: scale(0.98);
+}
+.template-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: var(--surface-2);
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.template-name {
+  font-weight: 750;
+  font-size: 16px;
+}
+.template-check {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid var(--line);
+  color: transparent;
+  transition: all 0.2s;
+}
+.template[aria-pressed='true'] {
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.template[aria-pressed='true'] .template-check {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}

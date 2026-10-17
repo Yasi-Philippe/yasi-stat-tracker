@@ -1,0 +1,74 @@
+rules_version = '2';
+
+// Data model (everything user-generated is end-to-end encrypted on the device):
+//   users/{uid}                  — key envelope: the data key wrapped by the password
+//                                  key and by the recovery key (no secrets in the clear)
+//   users/{uid}/chunks/{chunkId} — encrypted chunks { c: bytes, r: revision, t: time, k: key id }
+//
+// Anyone can create an account. Each account can only ever touch its own
+// users/{uid} subtree, and must verify its email before storing data (so the
+// "forgot password" email always reaches a real inbox).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isUser(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    function verified() {
+      return signedIn() && request.auth.token.email_verified == true;
+    }
+
+    function validEnvelope(d) {
+      return d.keys().hasOnly(['v', 'kdf', 'dekId', 'pw', 'rk', 'createdAt', 'updatedAt'])
+        && d.v == 1
+        && d.kdf is map
+        && d.kdf.keys().hasOnly(['alg', 'm', 't', 'p'])
+        && d.kdf.alg == 'argon2id'
+        && d.kdf.m is int && d.kdf.t is int && d.kdf.p is int
+        && d.dekId is string && d.dekId.size() <= 64
+        && d.pw is string && d.pw.size() <= 256
+        && d.rk is string && d.rk.size() <= 256
+        && d.updatedAt == request.time;
+    }
+
+    function validChunk(d) {
+      return d.keys().hasOnly(['c', 'r', 't', 'k'])
+        && d.c is bytes && d.c.size() <= 900000
+        && d.r is int
+        && d.t == request.time
+        && d.k is string && d.k.size() <= 64;
+    }
+
+    match /users/{uid} {
+      allow get: if isUser(uid);
+      allow list: if false;
+      allow create: if isUser(uid)
+        && validEnvelope(request.resource.data)
+        && request.resource.data.createdAt == request.time;
+      allow update: if isUser(uid)
+        && validEnvelope(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt;
+      // Deleting the account removes the key envelope; the data becomes unreadable.
+      allow delete: if isUser(uid);
+
+      match /chunks/{chunkId} {
+        allow read: if isUser(uid) && verified();
+        allow create: if isUser(uid) && verified()
+          && validChunk(request.resource.data)
+          && request.resource.data.r == 1;
+        allow update: if isUser(uid) && verified()
+          && validChunk(request.resource.data)
+          && request.resource.data.r == resource.data.r + 1;
+        allow delete: if isUser(uid);
+      }
+    }
+
+    // Everything else is closed.
+  }
+}

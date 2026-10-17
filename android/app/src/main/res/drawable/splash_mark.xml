@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Splash screen icon: build/brand/mark-foreground.svg as a vector (sharp at any size).
+     Same 108dp canvas and safe zone as the adaptive icon foreground. The gradient end point
+     reproduces the SVG's bounding-box gradient in user space. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="512"
+    android:viewportHeight="512">
+    <group
+        android:pivotX="256"
+        android:pivotY="256"
+        android:scaleX="0.62"
+        android:scaleY="0.62">
+        <path
+            android:pathData="M98,344 C146,344 158,266 210,274 C262,282 262,356 318,334 C356,319 366,230 396,168"
+            android:strokeWidth="42"
+            android:strokeLineCap="round"
+            android:strokeLineJoin="round">
+            <aapt:attr name="android:strokeColor">
+                <gradient
+                    android:type="linear"
+                    android:startX="98"
+                    android:startY="344"
+                    android:endX="252.13"
+                    android:endY="83.03">
+                    <item android:offset="0" android:color="#7C5CFF" />
+                    <item android:offset="0.55" android:color="#5FD3C7" />
+                    <item android:offset="1" android:color="#C6F432" />
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path
+            android:fillColor="#C6F432"
+            android:fillAlpha="0.18"
+            android:pathData="M338,168 a58,58 0 1,0 116,0 a58,58 0 1,0 -116,0 Z" />
+        <path
+            android:fillColor="#C6F432"
+            android:pathData="M363,168 a33,33 0 1,0 66,0 a33,33 0 1,0 -66,0 Z" />
+    </group>
+</vector>

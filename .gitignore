@@ -11,19 +11,24 @@ private/
 # Secrets
 .env
 .env.*
+!.env.example
 *.jks
 *.keystore
 keystore*.txt
+android/keystore.properties
 google-services.json
+.firebaserc
 GoogleService-Info.plist
 
 # Dependencies and builds
 node_modules/
 dist/
-build/
+dist-action/
+release/
 coverage/
 android/app/build/
 android/.gradle/
+android/.kotlin/
 ios/App/Pods/
 *.apk
 *.aab
@@ -33,3 +38,4 @@ ios/App/Pods/
 *.log
 .vscode/
 .idea/
+.firebase/
